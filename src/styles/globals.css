@@ -1,0 +1,10 @@
+@import './_fonts.css';
+
+html,
+body {
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
