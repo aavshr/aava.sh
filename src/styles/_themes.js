@@ -1,6 +1,6 @@
 export const darkMode = {
     colors: {
-        backgroundColor: '#3A3335',
+        backgroundColor: '#3a3335',
         white: '#ffffff',
         fireOpal: '#eb5e55',
         ruby: '#d81e5b',
