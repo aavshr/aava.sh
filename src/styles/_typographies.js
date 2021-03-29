@@ -10,3 +10,9 @@ export const regularLightTextStyle = css`
     font-weight: lighter;
     font-size: 20px;
 `;
+
+export const smallRegularLightTextStyle = css`
+    font-family: RobotoMono;
+    font-weight: lighter;
+    font-szie: 12px;
+`;

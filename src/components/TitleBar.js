@@ -39,6 +39,7 @@ const CloseButton = styled.button`
     color: ${(props) => props.theme.colors.ruby};
     &:hover {
         color: ${(props) => props.theme.colors.white};
+        cursor: pointer;
     }
 `;
 
