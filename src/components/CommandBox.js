@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { regularTextStyle } from '../styles/_typographies';
 import { keys } from '../helpers/utils';
+import parseCommand from '../helpers/parser';
 
 const CommandInput = styled.input`
     flex: 1;
@@ -18,8 +19,8 @@ const CommandInput = styled.input`
     ${regularTextStyle};
 `;
 
-function CommandBox() {
-    
+function CommandBox({setCmd}) {
+    const [disabled, setDisabled] = useState(false); 
     const [commandValue, setCommandValue] = useState('');
 
     const onChange = e => {
@@ -29,12 +30,18 @@ function CommandBox() {
     const onKeyDown = e => {
         const key = e.which || e.keyCode;
         if (key === keys.KEY_RETURN) {
-            console.log("typed command:", commandValue)
+            setCmd(parseCommand(commandValue));
+            setDisabled(true);
         } 
     };
 
     return (
-        <CommandInput autoFocus onChange={onChange} onKeyDown={onKeyDown}/>
+        <CommandInput 
+            autoFocus 
+            disabled={disabled} 
+            onChange={onChange} 
+            onKeyDown={onKeyDown}
+        />
     )
 }
 

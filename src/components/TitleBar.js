@@ -3,7 +3,6 @@ import { regularTextStyle} from '../styles/_typographies'
 
 const TitleBarDiv = styled.div`
     height: 32px; 
-    width: 100%;
     display: flex;
     align-items: center;
     padding: 0px;
