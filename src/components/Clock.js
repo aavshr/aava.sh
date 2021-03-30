@@ -5,7 +5,7 @@ import { smallRegularLightTextStyle } from '../styles/_typographies';
 
 const ClockDiv = styled.div`
     display: flex;
-    height: 38px;
+    height: 28px;
     width: 100%;
     margin-left: 10px;
     justify-content: left;

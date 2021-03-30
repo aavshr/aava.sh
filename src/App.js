@@ -5,6 +5,7 @@ import './styles/globals.css';
 
 import TitleBar from './components/TitleBar';
 import Clock from './components/Clock';
+import Prompt from './components/Prompt';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Global styles={globalCss}/>
         <TitleBar/>
         <Clock/>
+        <Prompt user='guest' dir='~'/>
     </ThemeProvider>
     );
 }
