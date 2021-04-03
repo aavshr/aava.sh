@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'RobotoMono';
+    font-style: 'normal';
+    font-display: 'swap';
+    src: local('RobotoMono'), local('Roboto-Mono'),
+        url('../fonts/RobotoMono-VariableFont_wght.ttf');
+}
