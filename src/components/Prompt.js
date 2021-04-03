@@ -19,7 +19,7 @@ const ShellPromptDiv = styled.div`
 const OutputContainer = styled.div`
     color: ${(props) => props.theme.colors.white};
     width: 100%;
-    margin-left: 10px;
+    padding-left: 10px;
     justify-content: left;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ const PromptDiv = styled.div`
     height: 32px;  
     align-items: center;
     justify-content: left;
-    margin-left: 10px;
+    padding-left: 10px;
     gap: 10px;
     ${regularTextStyle};
 `;
@@ -46,6 +46,7 @@ function Prompt({user, dir}){
             const o = "test.txt";
             setOutputs(outputs.concat(o))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cmd]);
 
     return (

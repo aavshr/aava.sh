@@ -7,7 +7,7 @@ const ClockDiv = styled.div`
     display: flex;
     height: 28px;
     width: 100%;
-    margin-left: 10px;
+    padding-left: 10px;
     justify-content: left;
     align-items: center;
     color: ${(props) => props.theme.colors.white};

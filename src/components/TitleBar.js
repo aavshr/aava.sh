@@ -15,7 +15,7 @@ const ButtonsDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: left;
-    margin: 10px;
+    padding: 10px;
 `;
 
 const TitleDiv = styled.div`
