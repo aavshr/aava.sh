@@ -36,15 +36,28 @@ const PromptDiv = styled.div`
     ${regularTextStyle};
 `;
 
-function Prompt({user, dir}){
+const PromptsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+`;
+
+function Prompt({user, dir, setUser, setDir, setRenderNext}){
     const [cmd, setCmd] = useState({});
     const [outputs, setOutputs] = useState([]);
 
     useEffect(() => {
-        if (cmd.command === 'ls'){
-            // TODO: move commands logic elsewhere
-            const o = "test.txt";
-            setOutputs(outputs.concat(o))
+        if (cmd.command){
+            if (cmd.command === 'ls'){
+                // TODO: move commands logic elsewhere
+                const o = "test.txt";
+                setOutputs(outputs.concat(o))
+            } else {
+                const o = `Command not found : '${cmd.command}'. Type 'help' for available commands.`
+                setOutputs(outputs.concat(o))
+            }
+            setRenderNext(true);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cmd]);
@@ -58,12 +71,47 @@ function Prompt({user, dir}){
             <CommandBox setCmd={setCmd}/>
         </PromptDiv>
         <OutputContainer>
-            {outputs.map((output) => {
-                return <div key={outputs.length}>{output}</div>
+            {outputs.map((output, index) => {
+                return <div key={index}>{output}</div>
             })}
         </OutputContainer>
         </>
     );
 }
 
-export default Prompt;
+function Prompts(){
+    const [renderNext, setRenderNext] = useState(false);
+    const [user, setUser] = useState('guest');
+    const [dir, setDir] = useState('~');
+    
+    const p = {
+        user: user,
+        dir: dir,
+    }
+    const [prompts, setPrompts] = useState([p]);
+
+    useEffect(()=> {
+        if (renderNext){
+            setPrompts(prompts.concat(p));
+            setRenderNext(false);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [renderNext])
+
+    return (
+        <PromptsContainer>
+            {prompts.map((prompt, index)=> {
+                return <Prompt 
+                    key={index} 
+                    user={prompt.user} 
+                    dir={prompt.dir}
+                    setUser={setUser}
+                    setDir={setDir}
+                    setRenderNext={setRenderNext}
+                />
+            })}
+        </PromptsContainer>
+    )
+}
+
+export default Prompts;
