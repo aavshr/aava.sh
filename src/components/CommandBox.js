@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { regularTextStyle } from '../styles/_typographies';
 import { keys } from '../helpers/utils';
-import parseCommand from '../helpers/parser';
+import parseCommand from '../helpers/commands/parser';
 
 const CommandInput = styled.input`
     flex: 1;

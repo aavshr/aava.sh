@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 
 import { regularLightTextStyle, regularTextStyle } from '../styles/_typographies';
 import CommandBox from './CommandBox';
+import actions from '../helpers/commands/actions';
+import { genUuid } from '../helpers/utils'
 
 const UserHostDiv = styled.div`
     color: ${(props) => props.theme.colors.ruby};
@@ -43,16 +45,21 @@ const PromptsContainer = styled.div`
     justify-content: left;
 `;
 
-function Prompt({user, dir, setUser, setDir, setRenderNext}){
+function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
     const [cmd, setCmd] = useState({});
     const [outputs, setOutputs] = useState([]);
 
     useEffect(() => {
         if (cmd.command){
-            if (cmd.command === 'ls'){
-                // TODO: move commands logic elsewhere
-                const o = "test.txt";
-                setOutputs(outputs.concat(o))
+            // clear command
+            if (cmd.command === 'clear'){
+                setClear(true);
+                setRenderNext(true);
+                return;
+            }
+            if (actions[cmd.command]){
+                const action = actions[cmd.command];
+                setOutputs(outputs.concat(action(cmd.args)));
             } else {
                 const o = `Command not found : '${cmd.command}'. Type 'help' for available commands.`
                 setOutputs(outputs.concat(o))
@@ -81,10 +88,12 @@ function Prompt({user, dir, setUser, setDir, setRenderNext}){
 
 function Prompts(){
     const [renderNext, setRenderNext] = useState(false);
+    const [clear, setClear] = useState(false);
     const [user, setUser] = useState('guest');
     const [dir, setDir] = useState('~');
     
     const p = {
+        key: genUuid(),
         user: user,
         dir: dir,
     }
@@ -92,21 +101,32 @@ function Prompts(){
 
     useEffect(()=> {
         if (renderNext){
+            setRenderNext(false)
+            if (clear){
+                setClear(false);
+                // hacky
+                setPrompts([{
+                    key: genUuid(),
+                    user: user,
+                    dir: dir,
+                }]);
+                return;
+            }
             setPrompts(prompts.concat(p));
-            setRenderNext(false);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [renderNext])
 
     return (
         <PromptsContainer>
-            {prompts.map((prompt, index)=> {
+            {prompts.map((prompt)=> {
                 return <Prompt 
-                    key={index} 
+                    key={prompt.key} 
                     user={prompt.user} 
                     dir={prompt.dir}
                     setUser={setUser}
                     setDir={setDir}
+                    setClear = {setClear}
                     setRenderNext={setRenderNext}
                 />
             })}
