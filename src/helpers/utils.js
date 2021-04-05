@@ -8,3 +8,9 @@ export const keys = {
 };
 
 export const genUuid = uuid;
+
+export const fileType = {
+    regular: 0, 
+    exec: 1,
+    dir: 2,
+}

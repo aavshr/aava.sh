@@ -1,22 +1,21 @@
+import TxtOutput from '../../components/output/TxtOutput';
+import LsOutput from '../../components/output/LsOutput';
 import { files } from '../../content/home.js'
 
 const ls = (args) => {
-    let o = ""
-    for (const file of Object.keys(files)){
-        o = o.concat(`${file}\t`);
-    }
-    return o;
+    console.log(Object.values(files));
+    return <LsOutput files={Object.values(files)}/>;
 }
 
 const cat = (args) => {
     if (!args || args.length === 0) {
-        return "cat needs an argument";
+        return <TxtOutput lines={["cat needs an argument"]}/>;
     } 
     const file = args[0];
-    if (files[file]){
-        return files[file];
+    if (files.file){
+        return <TxtOutput lines={files.file.content}/>;
     }
-    return `No such file: '${file}'`;
+    return <TxtOutput lines={[`No such file: '${file}'`]}/>;
 }
 
 const help = (args) => {

@@ -18,13 +18,9 @@ const ShellPromptDiv = styled.div`
     color: ${(props) => props.theme.colors.white};
 `;
 
-const OutputContainer = styled.div`
-    color: ${(props) => props.theme.colors.white};
-    width: 100%;
+const NotFoundDiv = styled.div`
     padding-left: 10px;
-    justify-content: left;
-    display: flex;
-    flex-direction: column;
+    color: ${(props) => props.theme.colors.white};
     ${regularLightTextStyle};
 `;
 
@@ -47,7 +43,7 @@ const PromptsContainer = styled.div`
 
 function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
     const [cmd, setCmd] = useState({});
-    const [outputs, setOutputs] = useState([]);
+    const [output, setOutput] = useState();
 
     useEffect(() => {
         if (cmd.command){
@@ -59,10 +55,14 @@ function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
             }
             if (actions[cmd.command]){
                 const action = actions[cmd.command];
-                setOutputs(outputs.concat(action(cmd.args)));
+                setOutput(action(cmd.args));
             } else {
-                const o = `Command not found : '${cmd.command}'. Type 'help' for available commands.`
-                setOutputs(outputs.concat(o))
+                const o = () => (
+                    <NotFoundDiv>
+                        Command not found : '{cmd.command}'. Type 'help' for available commands.
+                    </NotFoundDiv>
+                )
+                setOutput(o);
             }
             setRenderNext(true);
         }
@@ -77,11 +77,9 @@ function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
             <ShellPromptDiv>%</ShellPromptDiv>
             <CommandBox setCmd={setCmd}/>
         </PromptDiv>
-        <OutputContainer>
-            {outputs.map((output, index) => {
-                return <div key={index}>{output}</div>
-            })}
-        </OutputContainer>
+        <div>
+            {output}
+        </div>
         </>
     );
 }
