@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { regularTextStyle} from '../styles/_typographies'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons' 
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons' 
 
 const TitleBarDiv = styled.div`
     height: 32px; 
@@ -24,6 +27,16 @@ const TitleDiv = styled.div`
 
 const LinksDiv = styled.div`
     flex: 1;
+    display: flex;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-right: 10px;
+    gap: 10px;
+    justify-content: right;
+    a:hover {
+        text-decoration: none;
+        transform: scale(1.1);
+    }
 `;
 
 const CloseButton = styled.button`
@@ -53,9 +66,22 @@ function TitleBar() {
                 <CloseButton onClick={closeWindow}>X</CloseButton>
             </ButtonsDiv>
             <TitleDiv>
-                aava.sh
+                <a href='https://github.com/aavshr/aava.sh'>aava.sh</a>
             </TitleDiv>
-            <LinksDiv/>
+            <LinksDiv>
+                <a href="https://github.com/aavshr">
+                    <FontAwesomeIcon icon={faGithub}/>
+                </a>
+                <a href="https://twitter.com/aav_shr">
+                    <FontAwesomeIcon icon={faTwitter}/>
+                </a>
+                <a href="https://linkedin.com/aavshr">
+                    <FontAwesomeIcon icon={faLinkedin}/>
+                </a>
+                <a href="mailto:aavshr@gmail.com">
+                    <FontAwesomeIcon icon={faEnvelope}/>
+                </a>
+            </LinksDiv>
         </TitleBarDiv>
     );
 }

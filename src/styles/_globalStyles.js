@@ -9,4 +9,14 @@ export const globalCss = (props) => css`
     * {
         box-sizing: border-box;
     }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline; 
+    }
+
 `;

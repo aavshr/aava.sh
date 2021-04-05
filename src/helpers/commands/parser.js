@@ -1,5 +1,5 @@
 const parseCommand = (cmd) => {
-    const parts = cmd.toLowerCase().trim().split(" "); 
+    const parts = cmd.toLowerCase().trim().replace(/ +/g, ' ').split(' '); 
     const command = parts[0];
     let args = [];
     if (parts.length > 1){
