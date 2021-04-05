@@ -14,18 +14,21 @@ export const files = {
             "------", 
             "If you experience any bugs, please file an issue in the github repo (https://github.com/aavshr/aava.sh)."
         ],
-        type: fileType.regular
+        type: fileType.regular,
+        longView: 'r--',
     },
     "cowsay": {
         name: "cowsay",
         content: [execContent],
         type: fileType.exec,
         run: execs['cowsay'],
+        longView: 'r-x',
     },
     "do-not-run-me": {
         name: "do-not-run-me",
         content: [execContent],
         type: fileType.exec,
         run: execs['rick-roll'],
+        longView: 'r-x',
     },
 }

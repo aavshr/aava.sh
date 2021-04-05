@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 
-import { regularTextStyle } from '../../styles/_typographies';
+import { regularLightTextStyle, regularTextStyle } from '../../styles/_typographies';
 import { fileType } from '../../helpers/utils';
 
 const LsOutputContainer = styled.div`
     width: 100%;
     padding-left: 10px;
     justify-content: left;
-    gap: 30px;
     display: flex;
+    flex-direction: ${({longOption}) => {
+        return longOption ? 'column': 'row';
+    }};
+    gap: ${({longOption}) => {
+        return longOption ? '5px': '10px';
+    }};
     ${regularTextStyle};
 `;
 
@@ -21,16 +26,29 @@ const LsItemDiv = styled.div`
         }
         return props.theme.colors.white;
     }};
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    ${regularTextStyle};
 `;
 
-export default function LsOutput({files}){
+const PermsInfoDiv = styled.div`
+    color: ${(props) => props.theme.colors.opal};
+    ${regularLightTextStyle};
+`;
+
+export default function LsOutput({files, longOption}){
     return (
-        <LsOutputContainer>
+        <LsOutputContainer longOption={longOption}>
+            {longOption ? <LsItemDiv> total {files.length} </LsItemDiv> : null}
             {files.map((file, index) => {
                 return (
-                    <LsItemDiv key={index} itemType={file.type}>
-                        {file.name}
-                    </LsItemDiv>
+                    <div key={index}>
+                        <LsItemDiv itemType={file.type}>
+                            {longOption ? <PermsInfoDiv>{file.longView}</PermsInfoDiv> : null}
+                            {file.name}
+                        </LsItemDiv>
+                    </div>
                 )
             })}
         </LsOutputContainer>

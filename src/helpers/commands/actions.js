@@ -12,7 +12,34 @@ const noSuchFile = (file) => {
 }
 
 const ls = (args) => {
-    return <LsOutput files={Object.values(files)}/>;
+    // TODO: have proper parsing
+    // hideous right now
+    const l = args.length;
+    let longOption = false;
+    if (l > 0){
+        let dir = ".";
+        if (args[0] === "-l"){
+            longOption = true;
+            if (l > 2){
+                return <TxtOutput lines={[`'ls' takes a single argument.`]}/> 
+            }
+            if (l === 2){
+                dir = args[1];
+            }
+        } else {
+            if (l > 1){
+                return <TxtOutput lines={[`'ls' takes a single argument.`]}/> 
+            }
+            dir = args[0];
+        }
+        if (dir !== "."){
+            if (files[dir]){
+                return <LsOutput longOption={longOption} files={[files[dir]]}/>;
+            }
+            return <TxtOutput lines={[`No such file or directory: '${dir}'`]}/>
+        } 
+    }
+    return <LsOutput longOption={longOption} files={Object.values(files)}/>;
 }
 
 const cat = (args) => {
@@ -42,7 +69,7 @@ const sh = (args) => {
 
 const help = (args) => {
     return <TxtOutput lines = {[
-            "ls: list directory contents",
+            "ls [-l]: list directory contents",
             "cat: print files",
             "clear: clear output",
             "sh: run an executable file",
