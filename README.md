@@ -1,1 +1,1 @@
-Personal website terminal
+Personal website as a shell.
