@@ -75,7 +75,7 @@ function TitleBar() {
                 <a href="https://twitter.com/aav_shr">
                     <FontAwesomeIcon icon={faTwitter}/>
                 </a>
-                <a href="https://linkedin.com/aavshr">
+                <a href="https://linkedin.com/in/aavshr">
                     <FontAwesomeIcon icon={faLinkedin}/>
                 </a>
                 <a href="mailto:aavshr@gmail.com">
