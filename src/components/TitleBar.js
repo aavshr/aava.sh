@@ -32,7 +32,7 @@ const LinksDiv = styled.div`
     padding-top: 5px;
     padding-right: 10px;
     gap: 10px;
-    justify-content: right;
+    justify-content: flex-end;
     a:hover {
         text-decoration: none;
         transform: scale(1.1);
