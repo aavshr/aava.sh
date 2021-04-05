@@ -1,7 +1,7 @@
 import { fileType } from "../helpers/utils";
 import execs from "../helpers/commands/execs";
 
-const execContent = "Error: file is an executable";
+const execContent = "Error: can not print an executable file.";
 
 export const files = {
     "about.txt": {
@@ -16,10 +16,16 @@ export const files = {
         ],
         type: fileType.regular
     },
-    "do-not-run": {
-        name: "do-not-run",
+    "cowsay": {
+        name: "cowsay",
+        content: [execContent],
+        type: fileType.exec,
+        run: execs['cowsay'],
+    },
+    "do-not-run-me": {
+        name: "do-not-run-me",
         content: [execContent],
         type: fileType.exec,
         run: execs['rick-roll'],
-    }
+    },
 }

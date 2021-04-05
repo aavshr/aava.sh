@@ -13,6 +13,7 @@ const TxtOutputContainer = styled.div`
 `;
 
 export default function TxtOutput({lines}){
+    console.log("lines:", lines)
     return (
         <TxtOutputContainer>
             {lines.map((line, index) => {

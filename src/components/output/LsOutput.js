@@ -7,7 +7,7 @@ const LsOutputContainer = styled.div`
     width: 100%;
     padding-left: 10px;
     justify-content: left;
-    gap: 10px;
+    gap: 30px;
     display: flex;
     ${regularTextStyle};
 `;

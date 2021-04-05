@@ -21,7 +21,7 @@ const cat = (args) => {
     } 
     const file = args[0];
     if (files[file]){
-        return <TxtOutput lines={files.file.content}/>;
+        return <TxtOutput lines={files[file].content}/>;
     }
     return noSuchFile(file);
 }
