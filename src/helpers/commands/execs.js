@@ -9,7 +9,7 @@ const rickRoll = () => {
 
 const cowsay = (args) => {
     if (args.length < 2) {
-        return <TxtOutput lines={[`'cowsay' needs an argument. Try 'sh cowsay "hello".'`]}/>
+        return <TxtOutput lines={[`'cowsay' needs an argument. Try 'cowsay "hello".'`]}/>
     }
     return (
         <RegularOutput output={
