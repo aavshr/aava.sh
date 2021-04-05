@@ -1,4 +1,5 @@
 import { fileType } from "../helpers/utils";
+import execs from "../helpers/commands/execs";
 
 const execContent = "Error: file is an executable";
 
@@ -15,9 +16,10 @@ export const files = {
         ],
         type: fileType.regular
     },
-    "do-not-run-me": {
-        name: "do-not-run-me",
+    "do-not-run": {
+        name: "do-not-run",
         content: [execContent],
-        type: fileType.exec
+        type: fileType.exec,
+        run: execs['rick-roll'],
     }
 }
