@@ -12,7 +12,7 @@ const LsOutputContainer = styled.div`
         return longOption ? 'column': 'row';
     }};
     gap: ${({longOption}) => {
-        return longOption ? '5px': '10px';
+        return longOption ? '5px': '30px';
     }};
     ${regularTextStyle};
 `;
