@@ -39,6 +39,8 @@ function CommandBox({setCmd}) {
         <CommandInput 
             autoFocus 
             spellCheck={false}
+            autoComplete={false}
+            autoCapitalize={false}
             disabled={disabled} 
             onChange={onChange} 
             onKeyDown={onKeyDown}
