@@ -35,15 +35,21 @@ function CommandBox({setCmd}) {
         } 
     };
 
+    const onBlur = e => {
+        setTimeout(() => {
+            e.target.focus()
+        }, 5);
+    };
+
     return (
         <CommandInput 
             autoFocus 
             spellCheck={false}
             autoComplete={false}
-            autoCapitalize={false}
             disabled={disabled} 
             onChange={onChange} 
             onKeyDown={onKeyDown}
+            onBlur={onBlur}
         />
     )
 }
