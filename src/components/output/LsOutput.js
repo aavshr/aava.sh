@@ -11,9 +11,11 @@ const LsOutputContainer = styled.div`
     flex-direction: ${({longOption}) => {
         return longOption ? 'column': 'row';
     }};
-    gap: ${({longOption}) => {
-        return longOption ? '5px': '30px';
-    }};
+    > * + * {
+        ${({longOption}) => {
+        return longOption ? "margin-top: 5px" : "margin-left: 30px";
+        }};
+    }
     ${regularTextStyle};
 `;
 
@@ -28,7 +30,9 @@ const LsItemDiv = styled.div`
     }};
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    > * + * {
+        margin-left: 30px
+    }
     ${regularTextStyle};
 `;
 
@@ -46,7 +50,7 @@ export default function LsOutput({files, longOption}){
                     <div key={index}>
                         <LsItemDiv itemType={file.type}>
                             {longOption ? <PermsInfoDiv>{file.longView}</PermsInfoDiv> : null}
-                            {file.name}
+                            <div> {file.name} </div>
                         </LsItemDiv>
                     </div>
                 )

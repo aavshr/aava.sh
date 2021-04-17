@@ -31,11 +31,13 @@ const LinksDiv = styled.div`
     font-size: 20px;
     padding-top: 5px;
     padding-right: 10px;
-    gap: 10px;
     justify-content: flex-end;
     a:hover {
         text-decoration: none;
         transform: scale(1.1);
+    }
+    > * + * {
+        margin-left: 10px
     }
 `;
 
