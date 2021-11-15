@@ -45,7 +45,7 @@ function CommandBox({setCmd}) {
         <CommandInput 
             autoFocus 
             spellCheck={false}
-            autoComplete={false}
+            autoComplete="off"
             disabled={disabled} 
             onChange={onChange} 
             onKeyDown={onKeyDown}

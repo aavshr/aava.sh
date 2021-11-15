@@ -67,6 +67,8 @@ function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
                 setOutput(o);
             }
             setRenderNext(true);
+        } else if (cmd.command === "") {
+            setRenderNext(true);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cmd]);
