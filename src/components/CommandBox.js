@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { regularTextStyle } from '../styles/_typographies';
 import { keys } from '../helpers/utils';
 import parseCommand from '../helpers/commands/parser';
+import tabCompletion from '../helpers/commands/tab_completion';
 
 const CommandInput = styled.input`
     flex: 1;
@@ -33,6 +34,11 @@ function CommandBox({setCmd}) {
             setCmd(parseCommand(commandValue));
             setDisabled(true);
         } 
+        
+        if (key === keys.KEY_TAB){
+            // prevent default tab key behavior
+            e.preventDefault();
+        }
     };
 
     const onBlur = e => {
