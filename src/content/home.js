@@ -32,3 +32,8 @@ export const files = {
         longView: 'r-x',
     },
 }
+
+// only file keys for faster access
+// also because Object.Keys is newish
+// need to get rid of this eventually
+export const fileKeys = ["about.txt", "cowsay", "do-not-run-me"]

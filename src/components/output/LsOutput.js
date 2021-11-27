@@ -58,3 +58,21 @@ export default function LsOutput({files, longOption}){
         </LsOutputContainer>
     ) 
 }
+
+export function TabCompletionOptionsOutput({options}){
+    return (
+        <LsOutputContainer longOption={false}>
+            {
+                options.map((option, index)=> {
+                    return (
+                        <div key={index}>
+                            <LsItemDiv itemType={fileType.regular}>
+                            <div>{option}</div>
+                            </LsItemDiv>
+                        </div>
+                    )
+                })
+            }
+        </LsOutputContainer>
+    )
+}

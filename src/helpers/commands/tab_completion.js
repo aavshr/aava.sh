@@ -1,12 +1,20 @@
 import { getCommandParts } from '../utils'
 import actions from './actions'
-import { files } from '../../content/home.js'
+import { fileKeys, files } from '../../content/home.js'
+
+const results = (normal, sliced) => {
+    return {
+        normal: normal,
+        sliced: sliced,
+    }
+}
 
 const tabCompletion = (cmd) => {
-    let results = [];
+    let normal = [];
+    let sliced = []; // results with matching prefix sliced
 
-    if (!cmd) {
-        return results;
+    if (!cmd || cmd.replace(/\s/g, '') === "") {
+        return results(normal, normal);
     }
 
     const parts = getCommandParts(cmd);
@@ -14,7 +22,7 @@ const tabCompletion = (cmd) => {
 
     // case for {action \t or ./}
     if (cmd.endsWith(' ')){
-        return Object.keys(files);
+        return results(fileKeys,fileKeys);
     }
 
     // only searching through actions
@@ -23,32 +31,35 @@ const tabCompletion = (cmd) => {
         if (action.startsWith('./')){
             const prefix = action.replace('./', '');
             if (prefix === ""){
-                return Object.keys(files);
+                return results(fileKeys, fileKeys);
             }
             for(const file in files){
                 if (file.startsWith(prefix)){
-                    results.push(file);
+                    normal.push(file);
+                    sliced.push(file.slice(prefix.length));
                 }
             }
-            return results;
+            return results(normal, sliced);
         }
 
         for (const act in actions){
             if (act.startsWith(action)){
-                results.push(act);
+                normal.push(act);
+                sliced.push(act.slice(action.length));
             }
         }
-        return results;
+        return results(normal, sliced);
     }
 
     // handle other cases
     for (const file in files){
         const arg = parts[parts.length-1]
         if (file.startsWith(arg)){
-            results.push(file);
+           normal.push(file);
+           sliced.push(file.slice(arg.length));
         }
     }
-    return results;
+    return results(normal, sliced);
 }
 
 export default tabCompletion;

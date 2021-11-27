@@ -5,6 +5,7 @@ import { regularLightTextStyle, regularTextStyle } from '../styles/_typographies
 import CommandBox from './CommandBox';
 import actions from '../helpers/commands/actions';
 import { genUuid } from '../helpers/utils'
+import { TabCompletionOptionsOutput } from './output/LsOutput';
 
 const UserHostDiv = styled.div`
     color: ${(props) => props.theme.colors.ruby};
@@ -45,6 +46,7 @@ const PromptsContainer = styled.div`
 
 function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
     const [cmd, setCmd] = useState({});
+    const [tabCompletionOptions, setTabCompletionOptions] = useState([]);
     const [output, setOutput] = useState();
 
     useEffect(() => {
@@ -73,13 +75,22 @@ function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cmd]);
 
+    useEffect(() => {
+        if (tabCompletionOptions){
+            const o = () => (
+                <TabCompletionOptionsOutput options={tabCompletionOptions}/>
+            )
+            setOutput(o);
+        }
+    }, [tabCompletionOptions]);
+
     return (
         <>
         <PromptDiv>
             <UserHostDiv>{user}@sif</UserHostDiv>
             <DirDiv>{dir}</DirDiv>
             <ShellPromptDiv>%</ShellPromptDiv>
-            <CommandBox setCmd={setCmd}/>
+            <CommandBox setCmd={setCmd} setTabCompletionOptions={setTabCompletionOptions}/>
         </PromptDiv>
         <div>
             {output}
