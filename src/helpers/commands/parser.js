@@ -1,5 +1,7 @@
+import { getCommandParts } from "../utils";
+
 const parseCommand = (cmd) => {
-    const parts = cmd.toLowerCase().trim().replace(/ +/g, ' ').split(' '); 
+    const parts = getCommandParts(cmd);
     let command = parts[0];
     let args = [];
 

@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 
 import { regularTextStyle } from '../styles/_typographies';
-import { keys } from '../helpers/utils';
+import { keys, longestCommonPrefix } from '../helpers/utils';
 import parseCommand from '../helpers/commands/parser';
+import tabCompletion from '../helpers/commands/tab_completion';
 
 const CommandInput = styled.input`
     flex: 1;
@@ -19,12 +20,14 @@ const CommandInput = styled.input`
     ${regularTextStyle};
 `;
 
-function CommandBox({setCmd}) {
+function CommandBox({setCmd, setTabCompletionOptions}) {
     const [disabled, setDisabled] = useState(false); 
     const [commandValue, setCommandValue] = useState('');
 
     const onChange = e => {
-        setCommandValue(e.target.value);
+        if(commandValue !== e.target.value){
+            setCommandValue(e.target.value);
+        }
     };
 
     const onKeyDown = e => {
@@ -33,6 +36,30 @@ function CommandBox({setCmd}) {
             setCmd(parseCommand(commandValue));
             setDisabled(true);
         } 
+
+        // cntrl + l
+        if (key === keys.KEY_L && e.ctrlKey){
+            // clear command
+            setCmd({command: "clear"});
+        }
+        
+        if (key === keys.KEY_TAB){
+            // prevent default tab key behavior
+            e.preventDefault();
+
+            const { normal, sliced }= tabCompletion(commandValue);
+            if (normal.length === 1){
+                setCommandValue(commandValue+sliced[0]);
+            }
+            if (normal.length > 1){
+                // set common prefix if present
+                const commonPrefix = longestCommonPrefix(normal);
+                if (commonPrefix !== commandValue){
+                    setCommandValue(commandValue+commonPrefix);
+                }
+                setTabCompletionOptions(normal);
+            }
+        }
     };
 
     const onBlur = e => {
@@ -46,6 +73,7 @@ function CommandBox({setCmd}) {
             autoFocus 
             spellCheck={false}
             autoComplete="off"
+            value={commandValue}
             disabled={disabled} 
             onChange={onChange} 
             onKeyDown={onKeyDown}

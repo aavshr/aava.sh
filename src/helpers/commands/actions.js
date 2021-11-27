@@ -77,11 +77,18 @@ const help = (args) => {
     />
 }
 
+// clear does nothing
+// handled by the prompt
+const clear = (args) => {
+    return;
+}
+
 const actions = {
     'ls': ls,
     'cat': cat,
     'help': help,
     'sh': sh,
+    'clear': clear,
 }
 
 export default actions;
