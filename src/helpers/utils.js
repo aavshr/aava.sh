@@ -6,6 +6,8 @@ export const keys = {
     KEY_DOWN: 40,
     KEY_ESC: 27,
     KEY_TAB: 9,
+    KEY_CTRL: 17,
+    KEY_L: 76,
 };
 
 export const genUuid = v4;

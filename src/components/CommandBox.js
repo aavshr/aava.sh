@@ -36,6 +36,12 @@ function CommandBox({setCmd, setTabCompletionOptions}) {
             setCmd(parseCommand(commandValue));
             setDisabled(true);
         } 
+
+        // cntrl + l
+        if (key === keys.KEY_L && e.ctrlKey){
+            // clear command
+            setCmd({command: "clear"});
+        }
         
         if (key === keys.KEY_TAB){
             // prevent default tab key behavior
