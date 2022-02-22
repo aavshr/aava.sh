@@ -2,13 +2,18 @@ import TxtOutput from '../../components/output/TxtOutput';
 import LsOutput from '../../components/output/LsOutput';
 import { files } from '../../content/home.js'
 import { fileType } from '../utils';
+import MarkdownOutput from '../../components/output/MarkdownOutput';
 
 const needsArg = (cmd) => {
-   return <TxtOutput lines={[`'${cmd}' needs an argument.`]}/>;
+   return <TxtOutput lines={[`${cmd}: needs an argument`]}/>;
 }
 
 const noSuchFile = (file) => {
-    return <TxtOutput lines={[`No such file: '${file}'.`]}/>;
+    return <TxtOutput lines={[`${file}: no such file or directory`]}/>;
+}
+
+const otherFileContent = (cmd, fileName, content) => {
+    return <TxtOutput lines={[`${cmd}: ${fileName} ${content}`]}/>;
 }
 
 const ls = (args) => {
@@ -36,7 +41,7 @@ const ls = (args) => {
             if (files[dir]){
                 return <LsOutput longOption={longOption} files={[files[dir]]}/>;
             }
-            return <TxtOutput lines={[`No such file or directory: '${dir}'`]}/>
+            return <TxtOutput lines={[`No such file or directory: ${dir}`]}/>
         } 
     }
     return <LsOutput longOption={longOption} files={Object.values(files)}/>;
@@ -46,11 +51,14 @@ const cat = (args) => {
     if (!args || args.length === 0) {
         return needsArg("cat")
     } 
-    const file = args[0];
-    if (files[file]){
-        return <TxtOutput lines={files[file].content}/>;
+    const file = files[args[0]];
+    if (file){
+        if (file.type === fileType.regular) {
+            return <MarkdownOutput path={file.content}/>
+        }
+        return otherFileContent("cat", args[0], file.content);
     }
-    return noSuchFile(file);
+    return noSuchFile(args[0]);
 }
 
 const sh = (args) => {
