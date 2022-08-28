@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { regularTextStyle} from '../styles/_typographies'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons' 
+import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons' 
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons' 
 
 const TitleBarDiv = styled.div`
@@ -71,16 +71,13 @@ function TitleBar() {
                 <a href='https://github.com/aavshr/aava.sh'>aava.sh</a>
             </TitleDiv>
             <LinksDiv>
-                <a href="https://github.com/aavshr">
+                <a href="https://github.com/aavshr" target="_blank" rel="noreferrer">
                     <FontAwesomeIcon icon={faGithub}/>
                 </a>
-                <a href="https://twitter.com/aav_shr">
+                <a href="https://twitter.com/aav_shr" target="_blank" rel="noreferrer">
                     <FontAwesomeIcon icon={faTwitter}/>
                 </a>
-                <a href="https://linkedin.com/in/aavshr">
-                    <FontAwesomeIcon icon={faLinkedin}/>
-                </a>
-                <a href="mailto:aavshr@gmail.com">
+                <a href="mailto:aavshr@gmail.com" target="_blank" rel="noreferrer">
                     <FontAwesomeIcon icon={faEnvelope}/>
                 </a>
             </LinksDiv>
