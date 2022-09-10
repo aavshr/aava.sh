@@ -1,5 +1,4 @@
 import ImageOutput from '../../components/output/ImageOutput';
-import TxtOutput from '../../components/output/TxtOutput';
 import RegularOutput from '../../components/output/RegularOutput';
 import Cowsay from 'react-cowsay';
 
@@ -9,7 +8,7 @@ const rickRoll = () => {
 
 const cowsay = (args) => {
     if (args.length < 2) {
-        return <TxtOutput lines={[`'cowsay' needs an argument. Try 'cowsay "hello".'`]}/>
+        return <RegularOutput output={"cowsay: needs an argument"}/>
     }
     return (
         <RegularOutput output={

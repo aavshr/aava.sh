@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { regularLightTextStyle } from '../../styles/_typographies';
 
-const TxtOutputContainer = styled.div`
+const HelpOutputContainer = styled.div`
     color: ${(props) => props.theme.colors.white};
     width: 100%;
     padding-left: 10px;
@@ -12,12 +12,14 @@ const TxtOutputContainer = styled.div`
     ${regularLightTextStyle};
 `;
 
-export default function TxtOutput({lines}){
+export default function HelpOutput({lines}){
     return (
-        <TxtOutputContainer>
+        <HelpOutputContainer>
             {lines.map((line, index) => {
-                return <div key={index}>{line}</div>
+                return <div key={index}>
+                    <i>{line.cmd}</i>: {line.desc}
+                </div>
             })}
-        </TxtOutputContainer>
+        </HelpOutputContainer>
     );
 }
