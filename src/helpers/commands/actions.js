@@ -1,5 +1,6 @@
 import TxtOutput from '../../components/output/TxtOutput';
 import LsOutput from '../../components/output/LsOutput';
+import HelpOutput from '../../components/output/HelpOutput';
 import { files } from '../../content/home.js'
 import { fileType } from '../utils';
 import MarkdownOutput from '../../components/output/MarkdownOutput';
@@ -26,14 +27,14 @@ const ls = (args) => {
         if (args[0] === "-l"){
             longOption = true;
             if (l > 2){
-                return <TxtOutput lines={[`'ls' takes a single argument.`]}/> 
+                return <TxtOutput lines={[`ls: takes a single argument`]}/> 
             }
             if (l === 2){
                 dir = args[1];
             }
         } else {
             if (l > 1){
-                return <TxtOutput lines={[`'ls' takes a single argument.`]}/> 
+                return <TxtOutput lines={[`ls: takes a single argument`]}/> 
             }
             dir = args[0];
         }
@@ -70,17 +71,16 @@ const sh = (args) => {
         return noSuchFile(file);
     }
     if (files[file].type !== fileType.exec){
-        return <TxtOutput lines={[`'${file}' is not an executable file.`]}/>
+        return <TxtOutput lines={[`${file} is not an executable.`]}/>
     }
     return files[file].run(args);
 }
 
 const help = (args) => {
-    return <TxtOutput lines = {[
-            "ls [-l]: list directory contents",
-            "cat: print files",
-            "clear: clear output",
-            "sh: run an executable file",
+    return <HelpOutput lines = {[
+            {cmd: "ls", desc: "list directory contents"},
+            {cmd: "cat", desc:"print files"},
+            {cmd: "clear", desc: "clear output"}
         ]}
     />
 }

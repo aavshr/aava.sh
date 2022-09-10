@@ -63,7 +63,7 @@ function Prompt({user, dir, setUser, setDir, setClear, setRenderNext}){
             } else {
                 const o = () => (
                     <NotFoundDiv>
-                        Command not found : '{cmd.command}'. Type 'help' for available commands.
+                        Command not found: <i>{cmd.command}</i>. Use <i>help</i> for available commands.
                     </NotFoundDiv>
                 )
                 setOutput(o);
