@@ -23,7 +23,7 @@ export default function MarkdownOutput({path}){
                     .then(text => setContent(text))
             })
             .catch(err => console.log(err));
-    });
+    }, [path]);
 
     return (
         <MarkdownOutputContainer>
