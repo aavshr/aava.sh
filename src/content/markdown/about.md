@@ -1,6 +1,6 @@
 Hello 👋, I am Aavash. 
 
-I am an engineer at <span style="color:#f478b3"> <a href="https://www.deta.sh" target="_blank">Deta</a></span>.
+I am an engineer at <span style="color:#f478b3"> <a href="https://deta.space" target="_blank">Deta</a></span>.
 
 Deta gifted me this domain which gave me this fun idea of writing a shell
 as my personal website.
