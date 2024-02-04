@@ -1,9 +1,11 @@
 import TxtOutput from '../../components/output/TxtOutput';
 import LsOutput from '../../components/output/LsOutput';
 import HelpOutput from '../../components/output/HelpOutput';
+import HTMLOutput from '../../components/output/HTMLOutput';
 import { files } from '../../content/home.js'
 import { fileType } from '../utils';
 import MarkdownOutput from '../../components/output/MarkdownOutput';
+import RegularOutput from '../../components/output/RegularOutput.js';
 
 const needsArg = (cmd) => {
    return <TxtOutput lines={[`${cmd}: needs an argument`]}/>;
@@ -54,8 +56,14 @@ const cat = (args) => {
     } 
     const file = files[args[0]];
     if (file){
-        if (file.type === fileType.regular) {
+        if (file.type === fileType.markdown) {
             return <MarkdownOutput path={file.content}/>
+        }
+        if (file.type === fileType.regular) {
+            return <RegularOutput output={file.content}/>
+        }
+        if (file.type === fileType.html) {
+            return <HTMLOutput output={file.content}/>
         }
         return otherFileContent("cat", args[0], file.content);
     }

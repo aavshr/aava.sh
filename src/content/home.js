@@ -1,4 +1,5 @@
 import { fileType } from "../helpers/utils";
+import { aboutContent } from './inline';
 import execs from "../helpers/commands/execs";
 
 const execContent = "is an executable file";
@@ -6,8 +7,8 @@ const execContent = "is an executable file";
 export const files = {
     "about.txt": {
         name: "about.txt",
-        content: "markdown/about.md",
-        type: fileType.regular,
+        content: aboutContent,
+        type: fileType.html,
         longView: 'r--',
     },
     "cowsay": {

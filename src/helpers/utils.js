@@ -16,6 +16,8 @@ export const fileType = {
     regular: 0, 
     exec: 1,
     dir: 2,
+    markdown: 3,
+    html: 4,
 }
 
 export const getCommandParts = (cmd) => {
